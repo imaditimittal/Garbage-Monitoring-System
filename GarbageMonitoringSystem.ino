@@ -7,14 +7,14 @@
 #define BLYNK_PRINT Serial
 #define irPin D7
 
-Ultrasonic ultrasonic(D5,D6);                                       // Assign Trig PIN 14(D5),Assign Echo PIN 12(D6)
-char auth[] = "Kb-A4oIphgYFMEESb_41ZljsgER1_yA0";
+Ultrasonic ultrasonic(D5,D6);                                       // Assign Trig PIN D5,Assign Echo PIN D6
+char auth[] = "************";
 WidgetLCD lcd(V1);
-char ssid[] = "Geeta mittal";
-char pass[] = "Aditi@1801";
-char username[] = "171fd710-3623-11eb-b767-3f1a8f1211ba";
-char password[] = "ea84fc85917a43925270dfaca7cf1823cb7137a2";
-char client_ID[] = "227ee970-3623-11eb-a2e4-b32ea624e442";      // Your MQTT cayenne clientID
+char ssid[] = "************";
+char pass[] = "************";
+char username[] = "*************";
+char password[] = "*************";
+char client_ID[] = "**************";      // Your MQTT cayenne clientID
 
 Servo myservo;
 
@@ -22,8 +22,8 @@ int GIu_Ultrasonic_Dist_CM=0;
 float percentage;
 
 void setup(){  
-  Serial.begin(9600);                                              // Setup Debug uart port if you want ?
-  Cayenne.begin(username, password, client_ID, ssid, pass); // Setup cayenne server for MQTT protocol
+  Serial.begin(9600);                                            
+  Cayenne.begin(username, password, client_ID, ssid, pass);
   Blynk.begin(auth, ssid, pass);
   myservo.attach(D3);
   pinMode(irPin,INPUT);
@@ -42,7 +42,7 @@ void loop() {
     myservo.write(0);
   }
   delay(1000);
-  GIu_Ultrasonic_Dist_CM=27-ultrasonic.Ranging(CM);                 // Read ultrasonic distance value in CM or INCH
+  GIu_Ultrasonic_Dist_CM=27-ultrasonic.Ranging(CM);                 // Read ultrasonic distance value in CM
   Cayenne.virtualWrite(V7, GIu_Ultrasonic_Dist_CM);              // Post Distance value in cayenne mqtt server
   Serial.print(GIu_Ultrasonic_Dist_CM); 
   Serial.println(" cm" );
